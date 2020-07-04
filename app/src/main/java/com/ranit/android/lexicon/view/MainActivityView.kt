@@ -1,4 +1,4 @@
 package com.ranit.android.lexicon.view
 
-interface MainActivityView {
+interface MainActivityView : LexiconView {
 }
