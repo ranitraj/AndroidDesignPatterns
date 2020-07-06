@@ -3,11 +3,11 @@ package com.ranit.android.lexicon.model
 import com.ranit.android.lexicon.model.wordPojo.Word
 
 class ModelImpl : Model {
-    override fun addWord(word: String, description: String) {
+    override fun addWord(word : Word?) {
         TODO("To be implemented during TDD")
     }
 
-    override fun modifyWord(word: String, description: String) {
+    override fun modifyWord(word : Word?) {
         TODO("To be implemented during TDD")
     }
 
@@ -15,11 +15,16 @@ class ModelImpl : Model {
         TODO("To be implemented during TDD")
     }
 
-    override fun getWord(): Word {
+    override fun getWord(id: Long): Word? {
         TODO("To be implemented during TDD")
     }
 
-    override fun getAllWords(): List<Word> {
+    override fun getAllWords(): List<Word>? {
         TODO("To be implemented during TDD")
+    }
+
+    // Method to Trim empty spaces
+    fun trimWhiteSpaces(word: Word?) : Word? {
+        return word
     }
 }
