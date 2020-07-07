@@ -1,13 +1,23 @@
 package com.ranit.android.lexicon.model.wordPojo
 
-class Word constructor(word : String, description : String){
+class Word constructor(word : String, description : String) {
 
-    var wordTitle : String = word
+    var wordTitle : String = ""
         set(value) {
-            // The first character of the string should be Uppercase
-            field = value.capitalize()
+            // Trimming all white spaces and making the first alphabet capital
+            field = value.replace("\\s+".toRegex(),"").capitalize()
         }
 
-    var wordDescription : String = description
+    var wordDescription : String = ""
+        set(value) {
+            // Trimming white spaces at start and end of description
+            field = value.trim()
+        }
+
     var wordId : Long? = 0
+
+    init {
+        wordTitle = word
+        wordDescription = description
+    }
 }

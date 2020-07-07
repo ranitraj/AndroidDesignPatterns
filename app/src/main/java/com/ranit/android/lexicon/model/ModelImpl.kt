@@ -22,9 +22,4 @@ class ModelImpl : Model {
     override fun getAllWords(): List<Word>? {
         TODO("To be implemented during TDD")
     }
-
-    // Method to Trim empty spaces
-    fun trimWhiteSpaces(word: Word?) : Word? {
-        return word
-    }
 }
