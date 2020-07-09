@@ -1,7 +1,6 @@
-# AndroidDesignPatterns 
-# Kotlin 
+# AndroidDesignPatterns  
 
-This repository demonstrates creating a Dictionary Application named 'Lexicon' in which the user can perform the following operations:
+This repository demonstrates creating a Dictionary Application named 'Lexicon' using Kotlin in which the user can perform the following operations:
 1. Add Word
 2. Modify Word
 3. Remove Word
