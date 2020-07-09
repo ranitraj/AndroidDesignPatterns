@@ -1,18 +1,24 @@
 package com.ranit.android.lexicon.controller
 
-import com.ranit.android.lexicon.LexiconApplication
 import com.ranit.android.lexicon.model.ModelImpl
+import com.ranit.android.lexicon.view.MainActivityViewImpl
 
-class MainActivityController {
-    var application : LexiconApplication = LexiconApplication()
-    var modelImpl : ModelImpl
+class MainActivityController constructor(modelImpl: ModelImpl,
+                                         mainActivityViewImpl: MainActivityViewImpl){
 
-    init {
-        modelImpl = ModelImpl(application.getWordDbOperation())
-    }
+    var modelInstance : ModelImpl = modelImpl
+    var mainActivityViewInstance : MainActivityViewImpl = mainActivityViewImpl
 
     // Operations present in MainActivity
+    fun onViewLoaded() {
+
+    }
+
     fun onFloatingActionButtonClicked() {
+
+    }
+
+    fun launchDialogOnFloatingButtonClicked() {
 
     }
 
@@ -24,11 +30,11 @@ class MainActivityController {
 
     }
 
-    fun onItemSelected() {
+    fun onRecyclerViewItemSelected() {
 
     }
 
-    fun showErrorMessage(message : String) {
+    fun getData() {
 
     }
 }
