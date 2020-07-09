@@ -12,7 +12,7 @@ class DatabaseHelper constructor(
 ) : SQLiteOpenHelper(context, name, factory, version) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        TODO("Not yet implemented")
+        db?.execSQL(WordDbOperations.CREATE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -21,6 +21,6 @@ class DatabaseHelper constructor(
 
     override fun onConfigure(db: SQLiteDatabase?) {
         super.onConfigure(db)
-        TODO("Enable Foreign key-constraint")
+        db?.setForeignKeyConstraintsEnabled(true)
     }
 }
