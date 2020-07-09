@@ -77,7 +77,7 @@ class WordDbOperations private constructor(private val context: Context) {
         return sqLiteDatabase.delete(TABLE_WORDS, whereClause, null) > 0
     }
 
-    fun getWord(id: Long): Word {
+    fun getWordFromDB(id: Long): Word {
         val query: String = "SELECT * FROM $TABLE_WORDS WHERE $WORD_ID_COLUMN=$id"
         val wordCursorObject: Cursor = sqLiteDatabase.rawQuery(
             query,
@@ -93,7 +93,7 @@ class WordDbOperations private constructor(private val context: Context) {
         return word
     }
 
-    fun getAllWords(): ArrayList<Word> {
+    fun getAllWordsFromDB(): ArrayList<Word> {
         var listOfWords: ArrayList<Word> = ArrayList<Word>()
 
         val cursorObject: Cursor = sqLiteDatabase.query(
