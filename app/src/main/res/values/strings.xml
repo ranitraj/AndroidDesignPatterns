@@ -8,4 +8,5 @@
     <string name="modify">Modify</string>
     <string name="remove">Remove</string>
     <string name="cancel">Cancel</string>
+    <string name="cancel_button_clicked">Operation cancelled</string>
 </resources>

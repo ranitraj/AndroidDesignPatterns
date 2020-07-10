@@ -14,19 +14,19 @@ class MainActivityController constructor(modelImpl: ModelImpl,
 
     }
 
-    fun onFloatingActionButtonClicked() {
-
-    }
-
     fun launchDialogOnFloatingButtonClicked() {
-
+        mainActivityViewInstance.showAddWordDialog()
     }
 
-    fun onAddButtonClicked() {
+    fun onAddButtonClicked(wordTitle : String, wordDescription : String) {
 
     }
 
     fun onCancelButtonClicked() {
+        mainActivityViewInstance.displayMessage("Operation cancelled")
+    }
+
+    fun sendDataToRecyclerView() {
 
     }
 
