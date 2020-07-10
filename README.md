@@ -6,3 +6,4 @@ This branch demonstrates creating a Dictionary Application named 'Lexicon' using
 3. Remove Word
 
 The code in this branch shows the implementation based on MVC architecture design pattern.
+I am using TDD approach to develop this application.
