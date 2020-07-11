@@ -51,7 +51,7 @@ class ModelImpl constructor(wordDbOperations: WordDbOperations): Model {
         return isWordDeleted
     }
 
-    override fun getWord(id: Long): Word? {
+    override fun getWord(id: Long): Word {
         if (wordsList.size > 0) {
             return wordDbOperationsInstance.getWordFromDB(id)
         } else {
@@ -59,7 +59,7 @@ class ModelImpl constructor(wordDbOperations: WordDbOperations): Model {
         }
     }
 
-    override fun getAllWords(): List<Word>? {
+    override fun getAllWords(): ArrayList<Word> {
         if (wordsList.size > 0) {
             return wordsList
         } else {

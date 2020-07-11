@@ -1,40 +1,58 @@
 package com.ranit.android.lexicon.controller
 
 import com.ranit.android.lexicon.model.ModelImpl
+import com.ranit.android.lexicon.model.wordPojo.Word
 import com.ranit.android.lexicon.view.MainActivityViewImpl
+
+/**
+ * Controller and Views have 1-1 Mapping.
+ * So, this class acts as the Controller for the View MainActivityImpl.
+ */
 
 class MainActivityController constructor(modelImpl: ModelImpl,
                                          mainActivityViewImpl: MainActivityViewImpl){
 
-    var modelInstance : ModelImpl = modelImpl
-    var mainActivityViewInstance : MainActivityViewImpl = mainActivityViewImpl
+    private var modelInstance : ModelImpl = modelImpl
+    private var mainActivityViewInstance : MainActivityViewImpl = mainActivityViewImpl
 
-    // Operations present in MainActivity
-    fun onViewLoaded() {
-
+    /**
+     * This method fetches all the words present in the DB.
+     * The Controller fetches the data from Model using View's method
+     */
+    fun fetchData() {
+        try {
+            mainActivityViewInstance.getDataForRecyclerView(modelInstance.getAllWords())
+        } catch (exception : Exception) {
+            mainActivityViewInstance.displayMessage(exception.toString())
+        }
     }
 
-    fun launchDialogOnFloatingButtonClicked() {
-        mainActivityViewInstance.showAddWordDialog()
-    }
-
+    /**
+     * This method performs the following operations:
+     * 1. The editText parameters received from the View i.e:
+     *    onAddButtonClicked(wordTitle, wordDescription) is mapped to Word Object (POJO)
+     * 2. Invokes the Model method, addWord(newWord) which returns a 'boolean'
+     * 3. The 'boolean' returned refers to the status depicting successful/unsuccessful
+     *    addition of word into DB.
+     * 4. On successful addition, View invokes updateViewOnAddingWord() method on Controller
+     *    This method invokes getAllWords() from Model.
+     *
+     * @param wordTitle refers to the user input corresponding to the actual word
+     * @param wordDescription refers to the user input corresponding to description of the word
+     * @param newWord refers to the instance of Word Object
+     * @param message refers to the exception to be displayed in the Snack-bar
+     *
+     */
     fun onAddButtonClicked(wordTitle : String, wordDescription : String) {
+        val newWord : Word = Word(wordTitle, wordDescription)
 
-    }
-
-    fun onCancelButtonClicked() {
-        mainActivityViewInstance.displayMessage("Operation cancelled")
-    }
-
-    fun sendDataToRecyclerView() {
-
-    }
-
-    fun onRecyclerViewItemSelected() {
-
-    }
-
-    fun getData() {
-
+        val isWordAdded : Boolean = modelInstance.addWord(newWord)
+        try {
+            if (isWordAdded) {
+                mainActivityViewInstance.updateViewOnAddingWord(modelInstance.getAllWords())
+            }
+        } catch (exception: Exception) {
+            mainActivityViewInstance.displayMessage(exception.toString())
+        }
     }
 }

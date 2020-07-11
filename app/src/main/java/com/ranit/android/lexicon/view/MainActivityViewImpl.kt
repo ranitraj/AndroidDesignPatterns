@@ -1,7 +1,6 @@
 package com.ranit.android.lexicon.view
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,27 +42,25 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
             if (!isAddWordAlertDialogInflated) {
                 inflateAddWordAlertDialog()
             } else {
-                mainActivityController.launchDialogOnFloatingButtonClicked()
+                buildAndShowAddWordDialog()
             }
         })
     }
 
     override fun bindDataToView() {
-       mainActivityController.onViewLoaded()
+       mainActivityController.fetchData()
     }
 
     override fun displayMessage(message: String) {
         Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
 
-    override fun updateViewOnAddingWord() {
-        TODO("Set data to Recycler view adapter")
+    override fun updateViewOnAddingWord(wordsList: ArrayList<Word>) {
+        getDataForRecyclerView(wordsList)
     }
 
-    override fun displayData(listOfWords: ArrayList<Word>) {
-        if (listOfWords.isNotEmpty()) {
-            mainActivityController.getData()
-        }
+    override fun getDataForRecyclerView(wordsList: ArrayList<Word>) {
+        TODO("Pass the list as adapter to recycler view")
     }
 
     override fun inflateAddWordAlertDialog(): Boolean {
@@ -72,23 +69,25 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
         addWordTitleTextField = addWordDialogView.findViewById(R.id.word_title_text_field)
         addWordDescriptionTextField = addWordDialogView.findViewById(R.id.word_description_text_field)
 
-        mainActivityController.launchDialogOnFloatingButtonClicked()
+        buildAndShowAddWordDialog()
 
         return isAddWordAlertDialogInflated
     }
 
-    fun showAddWordDialog() {
+    private fun buildAndShowAddWordDialog() {
         addWordDialogBuilder.setView(addWordDialogView)
             .setTitle(R.string.add_word_dialog_title)
             .setMessage(R.string.add_word_dialog_subtitle)
             .setPositiveButton(R.string.add) { dialog, _ ->
                 val wordTitle : String = addWordTitleTextField.editText?.text.toString()
                 val wordDescription : String = addWordDescriptionTextField.editText?.text.toString()
+
                 mainActivityController.onAddButtonClicked(wordTitle, wordDescription)
+
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { dialog, _ ->
-                mainActivityController.onCancelButtonClicked()
+                displayMessage(rootView.resources.getString(R.string.cancel_button_clicked))
                 dialog.dismiss()
             }
             .show()
