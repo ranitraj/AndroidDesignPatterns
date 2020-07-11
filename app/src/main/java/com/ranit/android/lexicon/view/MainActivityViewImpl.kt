@@ -31,6 +31,9 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
 
     private var isAddWordAlertDialogInflated : Boolean = false
 
+    /**
+     * This method initializes all the views necessary on inflation of main activity
+     */
     override fun initView() {
         recyclerView = rootView.findViewById(R.id.recycler_view)
         floatingActionButton = rootView.findViewById(R.id.floating_action_button)
@@ -47,22 +50,41 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
         })
     }
 
+    /**
+     * This method is used to provide necessary data to the recycler view
+     * present in the main activity
+     */
     override fun bindDataToView() {
        mainActivityController.fetchData()
     }
 
+    /**
+     * This method is used to display any exception or message to the user
+     * through a Android Snack-bar
+     */
     override fun displayMessage(message: String) {
         Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
 
+    /**
+     * This method updates the recycler view whenever a new word is added
+     * to the DB
+     */
     override fun updateViewOnAddingWord(wordsList: ArrayList<Word>) {
         getDataForRecyclerView(wordsList)
     }
 
+    /**
+     * This method sets the data (List of all words) which is fetched from the
+     * DB through Model via Controller to the recycler view's adapter
+     */
     override fun getDataForRecyclerView(wordsList: ArrayList<Word>) {
         TODO("Pass the list as adapter to recycler view")
     }
 
+    /**
+     * This View method prepares the custom alert dialog for inflation
+     */
     override fun inflateAddWordAlertDialog(): Boolean {
         isAddWordAlertDialogInflated = true
 
@@ -74,6 +96,15 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
         return isAddWordAlertDialogInflated
     }
 
+    /**
+     * This method does the following:
+     * 1. Builds the Custom Alert Dialog
+     * 2. Passes the edit-text inputs to the Controller using the Controller's
+     *    onAddButtonClicked(wordTitle, wordDescription) method.
+     *
+     * @param wordTitle is of type String which takes the user input for word title
+     * @param wordDescription is of type String which takes the user input for word descriptions
+     */
     private fun buildAndShowAddWordDialog() {
         addWordDialogBuilder.setView(addWordDialogView)
             .setTitle(R.string.add_word_dialog_title)
