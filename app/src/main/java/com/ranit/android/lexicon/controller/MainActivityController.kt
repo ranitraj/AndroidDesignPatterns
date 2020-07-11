@@ -18,10 +18,11 @@ class MainActivityController constructor(modelImpl: ModelImpl,
     /**
      * This method fetches all the words present in the DB.
      * The Controller fetches the data from Model using View's method
+     * It makes the data available to be passed to the recycler view by the View
      */
     fun fetchData() {
         try {
-            mainActivityViewInstance.getDataForRecyclerView(modelInstance.getAllWords())
+            mainActivityViewInstance.setDataToRecyclerView(modelInstance.getAllWords())
         } catch (exception : Exception) {
             mainActivityViewInstance.displayMessage(exception.toString())
         }

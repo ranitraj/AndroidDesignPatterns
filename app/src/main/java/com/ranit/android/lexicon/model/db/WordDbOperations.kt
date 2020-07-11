@@ -4,30 +4,28 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
 import com.ranit.android.lexicon.model.wordPojo.Word
 
-/*
+/**
  * 1. This is a Singleton class
  * 2. Contains all SQLite CRUD Operations
  */
 
 class WordDbOperations private constructor(private val context: Context) {
-    private val TAG: String = "WordDbOperations"
 
     companion object {
         private lateinit var sqLiteDatabase: SQLiteDatabase
 
-        val DB_NAME: String = "lexicon"
-        val DB_VERSION: Int = 1
+        const val DB_NAME: String = "lexicon"
+        const val DB_VERSION: Int = 1
 
-        val TABLE_WORDS: String = "words_table"
+        const val TABLE_WORDS: String = "words_table"
 
-        val WORD_ID_COLUMN: String = "primary_key"
-        val WORD_TITLE_COLUMN: String = "word_title"
-        val WORD_DESCRIPTION_COLUMN: String = "word_description"
+        const val WORD_ID_COLUMN: String = "primary_key"
+        const val WORD_TITLE_COLUMN: String = "word_title"
+        const val WORD_DESCRIPTION_COLUMN: String = "word_description"
 
-        val CREATE_TABLE: String = "CREATE TABLE $TABLE_WORDS" +
+        const val CREATE_TABLE: String = "CREATE TABLE $TABLE_WORDS" +
                 "($WORD_ID_COLUMN LONG PRIMARY KEY, " +
                 "$WORD_TITLE_COLUMN TEXT NOT NULL, " +
                 "$WORD_DESCRIPTION_COLUMN TEXT NOT NULL)"
@@ -43,7 +41,6 @@ class WordDbOperations private constructor(private val context: Context) {
     }
 
     init {
-        Log.e(TAG, "Inside init block")
         sqLiteDatabase = DatabaseHelper(context, DB_NAME, null, DB_VERSION)
             .writableDatabase
     }
@@ -94,7 +91,7 @@ class WordDbOperations private constructor(private val context: Context) {
     }
 
     fun getAllWordsFromDB(): ArrayList<Word> {
-        var listOfWords: ArrayList<Word> = ArrayList<Word>()
+        val listOfWords: ArrayList<Word> = ArrayList<Word>()
 
         val cursorObject: Cursor = sqLiteDatabase.query(
             TABLE_WORDS, arrayOf(
@@ -112,6 +109,7 @@ class WordDbOperations private constructor(private val context: Context) {
                     cursorObject.getString(1),
                     cursorObject.getString(2), cursorObject.getLong(0)
                 )
+                listOfWords.add(word)
             }
             cursorObject.close()
         }

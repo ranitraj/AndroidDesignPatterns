@@ -6,12 +6,10 @@ import com.ranit.android.lexicon.model.wordPojo.Word
 import kotlin.Exception
 
 class ModelImpl constructor(wordDbOperations: WordDbOperations): Model {
-    private val TAG : String = "ModelImpl"
     private var wordDbOperationsInstance : WordDbOperations = wordDbOperations
     private var wordsList : ArrayList<Word> = ArrayList()
 
     init {
-        Log.e(TAG, "Inside init block ")
         wordsList = wordDbOperationsInstance.getAllWordsFromDB()
     }
 
@@ -61,7 +59,7 @@ class ModelImpl constructor(wordDbOperations: WordDbOperations): Model {
 
     override fun getAllWords(): ArrayList<Word> {
         if (wordsList.size > 0) {
-            return wordsList
+            return wordDbOperationsInstance.getAllWordsFromDB()
         } else {
             throw Exception("No words to fetch")
         }

@@ -1,6 +1,6 @@
 package com.ranit.android.lexicon.view
 
-/*
+/**
  * Contains generic methods related to all views
  */
 

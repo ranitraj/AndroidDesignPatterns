@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,9 +15,10 @@ import com.ranit.android.lexicon.controller.MainActivityController
 import com.ranit.android.lexicon.model.ModelImpl
 import com.ranit.android.lexicon.model.db.WordDbOperations
 import com.ranit.android.lexicon.model.wordPojo.Word
+import com.ranit.android.lexicon.view.adapter.WordsListAdapter
 
 class MainActivityViewImpl(private val context: Context, private val viewGroup: ViewGroup?)
-    : MainActivityView {
+    : MainActivityView, WordsListAdapter.RecyclerViewItemClickListener {
     var rootView: View = LayoutInflater.from(context).inflate(R.layout.activity_main, viewGroup)
     private var modelImpl: ModelImpl = ModelImpl(WordDbOperations.getWordDbOperationsInstance(context.applicationContext))
     private var mainActivityController: MainActivityController = MainActivityController(modelImpl,
@@ -29,7 +31,7 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
     private lateinit var addWordTitleTextField : TextInputLayout
     private lateinit var addWordDescriptionTextField : TextInputLayout
 
-    private var isAddWordAlertDialogInflated : Boolean = false
+    private lateinit var recyclerViewAdapter : WordsListAdapter
 
     /**
      * This method initializes all the views necessary on inflation of main activity
@@ -38,15 +40,13 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
         recyclerView = rootView.findViewById(R.id.recycler_view)
         floatingActionButton = rootView.findViewById(R.id.floating_action_button)
 
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
         // Floating action button click listener
         floatingActionButton.setOnClickListener(View.OnClickListener {
             addWordDialogView = LayoutInflater.from(context).inflate(R.layout.add_word_custom_dialog, viewGroup)
 
-            if (!isAddWordAlertDialogInflated) {
-                inflateAddWordAlertDialog()
-            } else {
-                buildAndShowAddWordDialog()
-            }
+            buildAndShowAddWordDialog()
         })
     }
 
@@ -71,29 +71,16 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
      * to the DB
      */
     override fun updateViewOnAddingWord(wordsList: ArrayList<Word>) {
-        getDataForRecyclerView(wordsList)
+        setDataToRecyclerView(wordsList)
     }
 
     /**
      * This method sets the data (List of all words) which is fetched from the
      * DB through Model via Controller to the recycler view's adapter
      */
-    override fun getDataForRecyclerView(wordsList: ArrayList<Word>) {
-        TODO("Pass the list as adapter to recycler view")
-    }
-
-    /**
-     * This View method prepares the custom alert dialog for inflation
-     */
-    override fun inflateAddWordAlertDialog(): Boolean {
-        isAddWordAlertDialogInflated = true
-
-        addWordTitleTextField = addWordDialogView.findViewById(R.id.word_title_text_field)
-        addWordDescriptionTextField = addWordDialogView.findViewById(R.id.word_description_text_field)
-
-        buildAndShowAddWordDialog()
-
-        return isAddWordAlertDialogInflated
+    override fun setDataToRecyclerView(wordsList: ArrayList<Word>) {
+        recyclerViewAdapter = WordsListAdapter(context, wordsList, this)
+        recyclerView.adapter = recyclerViewAdapter
     }
 
     /**
@@ -105,7 +92,10 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
      * @param wordTitle is of type String which takes the user input for word title
      * @param wordDescription is of type String which takes the user input for word descriptions
      */
-    private fun buildAndShowAddWordDialog() {
+    override fun buildAndShowAddWordDialog() {
+        addWordTitleTextField = addWordDialogView.findViewById(R.id.word_title_text_field)
+        addWordDescriptionTextField = addWordDialogView.findViewById(R.id.word_description_text_field)
+
         addWordDialogBuilder.setView(addWordDialogView)
             .setTitle(R.string.add_word_dialog_title)
             .setMessage(R.string.add_word_dialog_subtitle)
@@ -122,5 +112,9 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
                 dialog.dismiss()
             }
             .show()
+    }
+
+    override fun onItemClicked(position: Int) {
+        TODO("Navigate to Second Activity")
     }
 }
