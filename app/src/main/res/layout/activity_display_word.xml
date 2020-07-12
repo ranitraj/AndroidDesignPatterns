@@ -1,9 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DisplayWordActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/word_details_card"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:layout_marginTop="@dimen/dp_16"
+        app:layout_constraintWidth_percent="0.90"
+        app:layout_constraintHeight_percent="0.30"
+        app:cardElevation="@dimen/dp_8"
+        app:cardCornerRadius="@dimen/dp_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/dp_16">
+
+            <TextView
+                android:id="@+id/word_title_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/word"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/word_title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingEnd="@dimen/dp_8"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_24"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/word_description_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/description"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/word_description_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:paddingStart="@dimen/dp_8"
+                android:paddingEnd="@dimen/dp_8"
+                android:textStyle="italic"
+                android:textSize="@dimen/sp_20"
+                android:textColor="@color/colorAccent"/>
+            
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/modify_word_button"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:text="@string/modify"
+        app:rippleColor="@color/update_button_ripple"
+        app:icon="@drawable/ic_update_24"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:layout_constraintWidth_percent="0.30"
+        app:layout_constraintHeight_percent="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/delete_word_button"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_word_button"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:text="@string/remove"
+        app:rippleColor="@color/delete_button_ripple"
+        app:icon="@drawable/ic_delete_24"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:layout_constraintWidth_percent="0.30"
+        app:layout_constraintHeight_percent="0.075"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/modify_word_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
