@@ -1,7 +1,6 @@
 package com.ranit.android.lexicon.view.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,15 @@ class WordsListAdapter constructor(private val context: Context, private val wor
                                    private val clickListener: RecyclerViewItemClickListener)
     : RecyclerView.Adapter<WordsListAdapter.WordViewHolder>()  {
 
+    /**
+     * This is used to pass the position of the ViewHolder which is clicked
+     * to the next activity.
+     */
     interface RecyclerViewItemClickListener {
         fun onItemClicked(position: Int)
     }
 
     override fun getItemCount(): Int {
-        Log.e("RRG", "List SIze: ${wordsList.size}" )
         if (wordsList.size > 0) {
             return wordsList.size
         }

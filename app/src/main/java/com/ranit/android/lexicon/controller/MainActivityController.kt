@@ -56,4 +56,11 @@ class MainActivityController constructor(modelImpl: ModelImpl,
             mainActivityViewInstance.displayMessage(exception.toString())
         }
     }
+
+    /**
+     * Thi method is used by the Controller to launch Display Word Activity through view
+     */
+    fun navigateToDisplayWordActivity(position : Int) {
+        mainActivityViewInstance.launchDisplayWordActivity(position)
+    }
 }

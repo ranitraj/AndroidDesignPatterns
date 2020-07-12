@@ -1,6 +1,8 @@
 package com.ranit.android.lexicon.view
 
+import android.app.LauncherActivity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.ranit.android.lexicon.DisplayWordActivity
 import com.ranit.android.lexicon.R
 import com.ranit.android.lexicon.controller.MainActivityController
 import com.ranit.android.lexicon.model.ModelImpl
@@ -114,7 +117,23 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
             .show()
     }
 
+    /**
+     * This method passes control to Controller's navigateToDisplayWordActivity(position)
+     * method. This takes the Recycler view position clicked as the parameter
+     *
+     * @param position is the position of the selected recycler view view-holder
+     */
     override fun onItemClicked(position: Int) {
-        TODO("Navigate to Second Activity")
+        mainActivityController.navigateToDisplayWordActivity(position)
+    }
+
+    /**
+     * This method launches another activity through 'Intent' and passes position as
+     * the parameter
+     */
+    fun launchDisplayWordActivity(position: Int) {
+        val intent : Intent = Intent(context, DisplayWordActivity::class.java)
+        intent.putExtra("itemPosition", position)
+        context.startActivity(intent)
     }
 }
