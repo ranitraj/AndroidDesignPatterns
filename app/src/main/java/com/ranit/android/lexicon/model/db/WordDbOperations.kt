@@ -26,7 +26,7 @@ class WordDbOperations private constructor(private val context: Context) {
         const val WORD_DESCRIPTION_COLUMN: String = "word_description"
 
         const val CREATE_TABLE: String = "CREATE TABLE $TABLE_WORDS" +
-                "($WORD_ID_COLUMN LONG PRIMARY KEY, " +
+                "($WORD_ID_COLUMN INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$WORD_TITLE_COLUMN TEXT NOT NULL, " +
                 "$WORD_DESCRIPTION_COLUMN TEXT NOT NULL)"
 
@@ -74,18 +74,18 @@ class WordDbOperations private constructor(private val context: Context) {
         return sqLiteDatabase.delete(TABLE_WORDS, whereClause, null) > 0
     }
 
-    fun getWordFromDB(id: Long): Word {
+    fun getWordFromDB(id: Int): Word {
         val query: String = "SELECT * FROM $TABLE_WORDS WHERE $WORD_ID_COLUMN=$id"
         val wordCursorObject: Cursor = sqLiteDatabase.rawQuery(
             query,
             null
         )
+        wordCursorObject.moveToFirst()
 
         val word: Word = Word(
             wordCursorObject.getString(1),
-            wordCursorObject.getString(2), wordCursorObject.getLong(0)
+            wordCursorObject.getString(2), wordCursorObject.getInt(0)
         )
-
         wordCursorObject.close()
         return word
     }
@@ -107,7 +107,7 @@ class WordDbOperations private constructor(private val context: Context) {
                 // Convert DB data into Word(POJO) and add it into ArrayList
                 val word: Word = Word(
                     cursorObject.getString(1),
-                    cursorObject.getString(2), cursorObject.getLong(0)
+                    cursorObject.getString(2), cursorObject.getInt(0)
                 )
                 listOfWords.add(word)
             }

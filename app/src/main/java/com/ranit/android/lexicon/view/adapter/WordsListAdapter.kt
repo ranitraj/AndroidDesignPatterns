@@ -15,11 +15,11 @@ class WordsListAdapter constructor(private val context: Context, private val wor
     : RecyclerView.Adapter<WordsListAdapter.WordViewHolder>()  {
 
     /**
-     * This is used to pass the position of the ViewHolder which is clicked
+     * This is used to pass the ID of the word which is clicked
      * to the next activity.
      */
     interface RecyclerViewItemClickListener {
-        fun onItemClicked(position: Int)
+        fun onItemClicked(id: Int)
     }
 
     override fun getItemCount(): Int {
@@ -41,7 +41,8 @@ class WordsListAdapter constructor(private val context: Context, private val wor
         holder.wordTitleTextView.text = word.wordTitle
 
         holder.wordItemContainer.setOnClickListener(View.OnClickListener {
-            clickListener.onItemClicked(position)
+            val id : Int = word.wordId ?: 0
+            clickListener.onItemClicked(id)
         })
     }
 

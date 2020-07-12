@@ -1,6 +1,5 @@
 package com.ranit.android.lexicon.model
 
-import android.util.Log
 import com.ranit.android.lexicon.model.db.WordDbOperations
 import com.ranit.android.lexicon.model.wordPojo.Word
 import kotlin.Exception
@@ -49,12 +48,8 @@ class ModelImpl constructor(wordDbOperations: WordDbOperations): Model {
         return isWordDeleted
     }
 
-    override fun getWord(id: Long): Word {
-        if (wordsList.size > 0) {
-            return wordDbOperationsInstance.getWordFromDB(id)
-        } else {
-            throw Exception("No word to fetch")
-        }
+    override fun getWord(id: Int): Word {
+        return wordDbOperationsInstance.getWordFromDB(id)
     }
 
     override fun getAllWords(): ArrayList<Word> {

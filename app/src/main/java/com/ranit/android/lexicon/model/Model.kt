@@ -14,7 +14,7 @@ interface Model {
     fun removeWord(id: Long) : Boolean
 
     @Throws(Exception::class)
-    fun getWord(id: Long) : Word?
+    fun getWord(id: Int) : Word?
 
     @Throws(Exception::class)
     fun getAllWords() : List<Word>?

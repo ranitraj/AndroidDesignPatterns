@@ -60,7 +60,7 @@ class MainActivityController constructor(modelImpl: ModelImpl,
     /**
      * Thi method is used by the Controller to launch Display Word Activity through view
      */
-    fun navigateToDisplayWordActivity(position : Int) {
-        mainActivityViewInstance.launchDisplayWordActivity(position)
+    fun navigateToDisplayWordActivity(id : Int) {
+        mainActivityViewInstance.launchDisplayWordActivity(id)
     }
 }

@@ -1,6 +1,5 @@
 package com.ranit.android.lexicon.view
 
-import android.app.LauncherActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -118,22 +117,22 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
     }
 
     /**
-     * This method passes control to Controller's navigateToDisplayWordActivity(position)
-     * method. This takes the Recycler view position clicked as the parameter
+     * This method passes control to Controller's navigateToDisplayWordActivity(id)
+     * method. This takes the ID of the word which is clicked as the parameter
      *
-     * @param position is the position of the selected recycler view view-holder
+     * @param id is the ID of the clicked word
      */
-    override fun onItemClicked(position: Int) {
-        mainActivityController.navigateToDisplayWordActivity(position)
+    override fun onItemClicked(id: Int) {
+        mainActivityController.navigateToDisplayWordActivity(id)
     }
 
     /**
-     * This method launches another activity through 'Intent' and passes position as
+     * This method launches another activity through 'Intent' and passes word ID as
      * the parameter
      */
-    fun launchDisplayWordActivity(position: Int) {
+    fun launchDisplayWordActivity(id: Int) {
         val intent : Intent = Intent(context, DisplayWordActivity::class.java)
-        intent.putExtra("itemPosition", position)
+        intent.putExtra("wordId", id)
         context.startActivity(intent)
     }
 }
