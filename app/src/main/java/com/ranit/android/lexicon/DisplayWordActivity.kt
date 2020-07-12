@@ -9,7 +9,7 @@ class DisplayWordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        displayWordActivityViewInstance = DisplayWordActivityViewImpl(this, null, intent)
+        displayWordActivityViewInstance = DisplayWordActivityViewImpl(this, null, intent, this)
 
         setContentView(displayWordActivityViewInstance.rootView)
         displayWordActivityViewInstance.initView()

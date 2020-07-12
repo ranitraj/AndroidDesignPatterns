@@ -38,7 +38,7 @@ class ModelImpl constructor(wordDbOperations: WordDbOperations): Model {
         return isWordUpdated
     }
 
-    override fun removeWord(id: Long) : Boolean {
+    override fun removeWord(id: Int) : Boolean {
         val isWordDeleted : Boolean = wordDbOperationsInstance.removeWordFromDB(id)
         if (isWordDeleted) {
             refreshData()

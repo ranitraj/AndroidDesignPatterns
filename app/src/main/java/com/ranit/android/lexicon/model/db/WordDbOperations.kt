@@ -68,7 +68,7 @@ class WordDbOperations private constructor(private val context: Context) {
         ) > 0
     }
 
-    fun removeWordFromDB(id: Long): Boolean {
+    fun removeWordFromDB(id: Int): Boolean {
         val whereClause: String = "$WORD_ID_COLUMN=$id"
 
         return sqLiteDatabase.delete(TABLE_WORDS, whereClause, null) > 0

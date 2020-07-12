@@ -1,5 +1,6 @@
 package com.ranit.android.lexicon.controller
 
+import com.ranit.android.lexicon.R
 import com.ranit.android.lexicon.model.ModelImpl
 import com.ranit.android.lexicon.model.wordPojo.Word
 import com.ranit.android.lexicon.view.MainActivityViewImpl
@@ -51,6 +52,8 @@ class MainActivityController constructor(modelImpl: ModelImpl,
         try {
             if (isWordAdded) {
                 mainActivityViewInstance.updateViewOnAddingWord(modelInstance.getAllWords())
+                mainActivityViewInstance.displayMessage(mainActivityViewInstance
+                    .rootView.resources.getString(R.string.successful_add))
             }
         } catch (exception: Exception) {
             mainActivityViewInstance.displayMessage(exception.toString())
@@ -58,7 +61,7 @@ class MainActivityController constructor(modelImpl: ModelImpl,
     }
 
     /**
-     * Thi method is used by the Controller to launch Display Word Activity through view
+     * This method is used by the Controller to launch Display Word Activity through view
      */
     fun navigateToDisplayWordActivity(id : Int) {
         mainActivityViewInstance.launchDisplayWordActivity(id)

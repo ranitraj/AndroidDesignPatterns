@@ -9,6 +9,10 @@
     <string name="remove">Remove</string>
     <string name="cancel">Cancel</string>
     <string name="word">Word:</string>
+    <string name="successful_add">Word has been added successfully</string>
+    <string name="successful_modify">Word has been modified successfully</string>
+    <string name="successful_delete">Word has been deleted successfully</string>
     <string name="description">Description:</string>
     <string name="cancel_button_clicked">Operation cancelled</string>
+    <string name="remove_word_confirmation">Are you sure you want to delete this word?</string>
 </resources>

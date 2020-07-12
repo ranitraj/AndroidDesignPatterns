@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.ranit.android.lexicon.DisplayWordActivity
+import com.ranit.android.lexicon.MainActivity
 import com.ranit.android.lexicon.R
 import com.ranit.android.lexicon.controller.DisplayWordActivityController
 import com.ranit.android.lexicon.model.ModelImpl
@@ -15,13 +18,15 @@ import com.ranit.android.lexicon.model.db.WordDbOperations
 import com.ranit.android.lexicon.model.wordPojo.Word
 
 class DisplayWordActivityViewImpl(private val context: Context,
-                                  private val viewGroup: ViewGroup?, private val intent: Intent)
+                                  private val viewGroup: ViewGroup?, private val intent: Intent, private val activityInstance: DisplayWordActivity)
     : DisplayWordActivityView {
-
     val rootView : View = LayoutInflater.from(context).inflate(R.layout.activity_display_word, viewGroup)
     private val modelInstance : ModelImpl = ModelImpl(WordDbOperations.getWordDbOperationsInstance(context))
     private val displayWordActivityControllerInstance : DisplayWordActivityController =
         DisplayWordActivityController(modelInstance, this)
+
+    private var wordId : Int = 0
+    private lateinit var removeAlertDialogBuilder: MaterialAlertDialogBuilder
 
     private lateinit var wordTitleTextView : TextView
     private lateinit var wordDescriptionTextView : TextView
@@ -42,7 +47,7 @@ class DisplayWordActivityViewImpl(private val context: Context,
         })
 
         removeWordButton.setOnClickListener(View.OnClickListener {
-            TODO("Launch Remove word alert dialog")
+            buildAndShowRemoveWordDialog()
         })
     }
 
@@ -51,7 +56,7 @@ class DisplayWordActivityViewImpl(private val context: Context,
      * from the intent and then fetch the Data for the same from using Controller
      */
     override fun bindDataToView() {
-        val wordId : Int = intent.getIntExtra("wordId", 2)
+        wordId = intent.getIntExtra("wordId", 0)
         displayWordActivityControllerInstance.fetchWordBasedOnId(wordId)
     }
 
@@ -70,5 +75,31 @@ class DisplayWordActivityViewImpl(private val context: Context,
     override fun setDataToView(word: Word) {
         wordTitleTextView.text = word.wordTitle
         wordDescriptionTextView.text = word.wordDescription
+    }
+
+    /**
+     * This method displays the alert dialog for remove word
+     */
+    override fun buildAndShowRemoveWordDialog() {
+        removeAlertDialogBuilder = MaterialAlertDialogBuilder(context)
+        removeAlertDialogBuilder.setTitle(R.string.remove_word_confirmation)
+            .setPositiveButton(R.string.remove) { dialog, _ ->
+
+                displayWordActivityControllerInstance.onRemoveButtonClicked(wordId)
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
+                displayMessage(rootView.resources.getString(R.string.cancel_button_clicked))
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    /**
+     * This method is invoked by the Controller upon successful removal of word from DB
+     * This method finishes the current Activity
+     */
+    override fun launchMainActivityOnWordDeletion() {
+        activityInstance.finish()
     }
 }
