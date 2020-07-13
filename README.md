@@ -12,6 +12,6 @@ This will give interested readers a clear cut idea on how to create the same app
 The 'main' branch is just an empty project.
 
 Checkout to the following branches to refer the different design patterns:
-1. lexicon_MVC (MVC design pattern)     [IN-PROGRESS]
-2. lexicon_MVP (MVP design pattern)     [TBD]
+1. lexicon_MVC (MVC design pattern)
+2. lexicon_MVP (MVP design pattern)     [IN-PROGRESS]
 3. lexicon_MVVP (MVVM design pattern)   [TBD]
