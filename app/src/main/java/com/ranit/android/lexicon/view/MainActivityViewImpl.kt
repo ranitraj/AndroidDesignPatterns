@@ -115,8 +115,11 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
                 val wordTitle : String = addWordTitleTextField.editText?.text.toString()
                 val wordDescription : String = addWordDescriptionTextField.editText?.text.toString()
 
-                mainActivityController.onAddButtonClicked(wordTitle, wordDescription)
-
+                if (wordTitle.trim().isNotEmpty() && wordDescription.trim().isNotEmpty()) {
+                    mainActivityController.onAddButtonClicked(wordTitle, wordDescription)
+                } else {
+                    displayMessage(rootView.resources.getString(R.string.blank_field_error))
+                }
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { dialog, _ ->

@@ -117,7 +117,11 @@ class DisplayWordActivityViewImpl(private val context: Context, private val view
                 val wordDescription : String = modifyWordDescriptionTextField.editText?.text.toString()
 
                 word = Word(wordTitle, wordDescription, wordId)
-                displayWordActivityControllerInstance.onModifyButtonClicked(word)
+                if (wordTitle.trim().isNotEmpty() && wordDescription.trim().isNotEmpty()) {
+                    displayWordActivityControllerInstance.onModifyButtonClicked(word)
+                } else {
+                    displayMessage(rootView.resources.getString(R.string.blank_field_error))
+                }
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { dialog, _ ->

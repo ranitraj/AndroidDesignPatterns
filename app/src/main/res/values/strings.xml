@@ -17,4 +17,5 @@
     <string name="description">Description:</string>
     <string name="cancel_button_clicked">Operation cancelled</string>
     <string name="remove_word_confirmation">Are you sure you want to delete this word?</string>
+    <string name="blank_field_error">Error: Field must not be left blank</string>
 </resources>
