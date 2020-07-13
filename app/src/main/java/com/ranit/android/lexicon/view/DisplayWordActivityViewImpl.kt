@@ -9,16 +9,16 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 import com.ranit.android.lexicon.DisplayWordActivity
-import com.ranit.android.lexicon.MainActivity
 import com.ranit.android.lexicon.R
 import com.ranit.android.lexicon.controller.DisplayWordActivityController
 import com.ranit.android.lexicon.model.ModelImpl
 import com.ranit.android.lexicon.model.db.WordDbOperations
 import com.ranit.android.lexicon.model.wordPojo.Word
 
-class DisplayWordActivityViewImpl(private val context: Context,
-                                  private val viewGroup: ViewGroup?, private val intent: Intent, private val activityInstance: DisplayWordActivity)
+class DisplayWordActivityViewImpl(private val context: Context, private val viewGroup: ViewGroup?,
+                                  private val intent: Intent, private val activityInstance: DisplayWordActivity)
     : DisplayWordActivityView {
     val rootView : View = LayoutInflater.from(context).inflate(R.layout.activity_display_word, viewGroup)
     private val modelInstance : ModelImpl = ModelImpl(WordDbOperations.getWordDbOperationsInstance(context))
@@ -26,12 +26,16 @@ class DisplayWordActivityViewImpl(private val context: Context,
         DisplayWordActivityController(modelInstance, this)
 
     private var wordId : Int = 0
-    private lateinit var removeAlertDialogBuilder: MaterialAlertDialogBuilder
+    private lateinit var word : Word
+    private lateinit var alertDialogBuilder: MaterialAlertDialogBuilder
 
     private lateinit var wordTitleTextView : TextView
     private lateinit var wordDescriptionTextView : TextView
     private lateinit var modifyWordButton: Button
     private lateinit var removeWordButton: Button
+    private lateinit var modifyWordDialogView : View
+    private lateinit var modifyWordTitleTextField : TextInputLayout
+    private lateinit var modifyWordDescriptionTextField : TextInputLayout
 
     /**
      * This method initializes all the views necessary on inflation of Display word activity
@@ -43,7 +47,9 @@ class DisplayWordActivityViewImpl(private val context: Context,
         removeWordButton = rootView.findViewById(R.id.delete_word_button)
 
         modifyWordButton.setOnClickListener(View.OnClickListener {
-            TODO("Launch Modify word alert dialog")
+            modifyWordDialogView = LayoutInflater.from(context).inflate(R.layout.add_word_custom_dialog,
+                viewGroup, false)
+            buildAndShowModifyWordDialog()
         })
 
         removeWordButton.setOnClickListener(View.OnClickListener {
@@ -81,11 +87,37 @@ class DisplayWordActivityViewImpl(private val context: Context,
      * This method displays the alert dialog for remove word
      */
     override fun buildAndShowRemoveWordDialog() {
-        removeAlertDialogBuilder = MaterialAlertDialogBuilder(context)
-        removeAlertDialogBuilder.setTitle(R.string.remove_word_confirmation)
+        alertDialogBuilder = MaterialAlertDialogBuilder(context)
+        alertDialogBuilder.setTitle(R.string.remove_word_confirmation)
             .setPositiveButton(R.string.remove) { dialog, _ ->
 
                 displayWordActivityControllerInstance.onRemoveButtonClicked(wordId)
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
+                displayMessage(rootView.resources.getString(R.string.cancel_button_clicked))
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    /**
+     * This method displays the custom alert dialog for modify word
+     */
+    override fun buildAndShowModifyWordDialog() {
+        modifyWordTitleTextField = modifyWordDialogView.findViewById(R.id.word_title_text_field)
+        modifyWordDescriptionTextField = modifyWordDialogView.findViewById(R.id.word_description_text_field)
+
+        alertDialogBuilder = MaterialAlertDialogBuilder(context)
+        alertDialogBuilder.setView(modifyWordDialogView)
+            .setTitle(R.string.modify_word_dialog_title)
+            .setMessage(R.string.modify_word_dialog_subtitle)
+            .setPositiveButton(R.string.modify) { dialog, _ ->
+                val wordTitle : String = modifyWordTitleTextField.editText?.text.toString()
+                val wordDescription : String = modifyWordDescriptionTextField.editText?.text.toString()
+
+                word = Word(wordTitle, wordDescription, wordId)
+                displayWordActivityControllerInstance.onModifyButtonClicked(word)
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { dialog, _ ->
