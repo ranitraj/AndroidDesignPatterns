@@ -87,12 +87,14 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
      */
     override fun setDataToRecyclerView(wordsList: ArrayList<Word>) {
         if (wordsList.isEmpty()) {
+            recyclerView.visibility = View.GONE
             lottieAnimationView.visibility = View.VISIBLE
         } else {
             lottieAnimationView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+            recyclerViewAdapter = WordsListAdapter(context, wordsList, this)
+            recyclerView.adapter = recyclerViewAdapter
         }
-        recyclerViewAdapter = WordsListAdapter(context, wordsList, this)
-        recyclerView.adapter = recyclerViewAdapter
     }
 
     /**
