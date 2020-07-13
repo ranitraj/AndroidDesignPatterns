@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -27,6 +28,7 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
         this)
     private var addWordDialogBuilder : MaterialAlertDialogBuilder = MaterialAlertDialogBuilder(context)
 
+    private lateinit var lottieAnimationView: LottieAnimationView
     private lateinit var recyclerView: RecyclerView
     private lateinit var floatingActionButton: FloatingActionButton
     private lateinit var addWordDialogView : View
@@ -39,6 +41,7 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
      * This method initializes all the views necessary on inflation of main activity
      */
     override fun initView() {
+        lottieAnimationView = rootView.findViewById(R.id.no_data_lottie_animation)
         recyclerView = rootView.findViewById(R.id.recycler_view)
         floatingActionButton = rootView.findViewById(R.id.floating_action_button)
 
@@ -77,10 +80,17 @@ class MainActivityViewImpl(private val context: Context, private val viewGroup: 
     }
 
     /**
-     * This method sets the data (List of all words) which is fetched from the
-     * DB through Model via Controller to the recycler view's adapter
+     * This method does the following:
+     * 1. Checks for list size and decides whether to show the lottie-view or not
+     * 2. Sets the data (List of all words) which is fetched from the DB through Model
+     *    via Controller to the recycler view's adapter
      */
     override fun setDataToRecyclerView(wordsList: ArrayList<Word>) {
+        if (wordsList.isEmpty()) {
+            lottieAnimationView.visibility = View.VISIBLE
+        } else {
+            lottieAnimationView.visibility = View.GONE
+        }
         recyclerViewAdapter = WordsListAdapter(context, wordsList, this)
         recyclerView.adapter = recyclerViewAdapter
     }

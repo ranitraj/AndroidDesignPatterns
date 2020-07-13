@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_data_lottie_animation"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintWidth_percent="0.30"
+        app:layout_constraintHeight_percent="0.15"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="empty_box.json"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
