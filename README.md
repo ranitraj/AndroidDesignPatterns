@@ -8,4 +8,8 @@ This branch demonstrates creating a Dictionary Application named 'Lexicon' using
 The code in this branch shows the implementation based on MVC architecture design pattern.
 I am using TDD approach to develop this application.
 
-I have used jUnit5 for Unit Testing.
+The following components have been used:
+1. Material Design Library
+2. Lottie
+3. jUnit5
+4. MockK
