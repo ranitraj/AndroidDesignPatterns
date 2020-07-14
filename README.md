@@ -13,3 +13,5 @@ The following components have been used:
 2. Lottie
 3. jUnit5
 4. MockK
+5. SQLite DB for storing words
+6. Recycler View
