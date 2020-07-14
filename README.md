@@ -1,17 +1,19 @@
-# AndroidDesignPatterns  
+# MVP
 
-This repository demonstrates creating a Dictionary Application named 'Lexicon' using Kotlin in which the user can perform the following operations:
+This branch demonstrates creating a Dictionary Application named 'Lexicon' using Kotlin in which the user can perform the following operations:
 1. Add Word
 2. Modify Word
 3. Remove Word
 
-The same project will be demonstrated using different Architecture design patterns such as MVC, MVP and MVVM.
+The code in this branch shows the implementation based on MVP architecture design pattern.
+I am using TDD approach to develop this application.
 
-This will give interested readers a clear cut idea on how to create the same application using different Architecture design patterns.
+Instead of using SQLite DB to store and retrieve words, I'll be using Google Firebase DB here. 
 
-The 'main' branch is just an empty project.
-
-Checkout to the following branches to refer the different design patterns:
-1. lexicon_MVC (MVC design pattern)
-2. lexicon_MVP (MVP design pattern)     [IN-PROGRESS]
-3. lexicon_MVVP (MVVM design pattern)   [TBD]
+The following components have been used:
+1. Material Design Library
+2. Lottie
+3. jUnit5
+4. MockK
+5. Firebase
+6. Recycler View
