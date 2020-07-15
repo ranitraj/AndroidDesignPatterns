@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "202563126272",
+    "firebase_url": "https://lexicon-b49c8.firebaseio.com",
+    "project_id": "lexicon-b49c8",
+    "storage_bucket": "lexicon-b49c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202563126272:android:eef78a7f35a49dffbbc4e5",
+        "android_client_info": {
+          "package_name": "com.ranit.android.lexicon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202563126272-l1a15m3ohl03qfqeh6vij47shij2itb3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ranit.android.lexicon",
+            "certificate_hash": "8bcb265a51a32005d94519456f07474edc8444d8"
+          }
+        },
+        {
+          "client_id": "202563126272-ucckkmnts43ptmtei7u9e4fdk1ul0vei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe4eim_NbUegkYELKHHEnmfeaHvJ3Ij8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202563126272-ucckkmnts43ptmtei7u9e4fdk1ul0vei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
