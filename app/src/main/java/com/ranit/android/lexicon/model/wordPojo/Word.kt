@@ -1,6 +1,6 @@
 package com.ranit.android.lexicon.model.wordPojo
 
-class Word constructor(word: String, description: String, id: Int = 0) {
+data class Word(val word: String, val description: String, val id: Int = 0) {
 
     var wordTitle: String = ""
         set(value) {
@@ -14,7 +14,7 @@ class Word constructor(word: String, description: String, id: Int = 0) {
             field = value.trim()
         }
 
-    var wordId: Int? = 0
+    var wordId: Int = 0
 
     init {
         wordTitle = word
